@@ -19,7 +19,9 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import kotlin.properties.Delegates
 
-class AnthropicModel(val model: Models, val apiKey: String, think: Boolean = false, readTimeout: Int = 600) : OkHttpLLM(model.id, null, readTimeout, ModelVendor.Anthropic) {
+class AnthropicModel(val modelId: String, val apiKey: String, think: Boolean = false, readTimeout: Int = 600) : OkHttpLLM(modelId, null, readTimeout, ModelVendor.Anthropic) {
+    constructor(model: Models, apiKey: String, think: Boolean = false, readTimeout: Int = 600) : this(model.id, apiKey, think, readTimeout)
+
     var endpoint = "https://api.anthropic.com/v1"
     var anthropicVersion = "2023-06-01"
 
@@ -249,7 +251,7 @@ class AnthropicModel(val model: Models, val apiKey: String, think: Boolean = fal
     }
 
     private fun buildRequestBody(messageHistory: JSONArray?): JSONObject = JSONObject().apply {
-        put("model", model.id)
+        put("model", modelId)
         put("messages", messageHistory)
         put("max_tokens", effectiveMaxTokens)
         put("stream", true)
