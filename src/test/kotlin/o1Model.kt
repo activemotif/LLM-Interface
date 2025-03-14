@@ -1,4 +1,4 @@
-import net.prismclient.openai.OpenAIModel
+import net.prismclient.model.vendor.openai.OpenAIModel
 import net.prismclient.util.Model
 
 fun main() {

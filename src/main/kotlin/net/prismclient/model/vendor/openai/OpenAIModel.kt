@@ -1,4 +1,4 @@
-package net.prismclient.openai
+package net.prismclient.model.vendor.openai
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
